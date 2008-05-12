@@ -74,7 +74,8 @@ module MerbExceptions
       }
     end
 
-   private  
+  private
+    
     def post_hook(address)
       Merb.logger.info "- hooking to #{address}"
       uri = URI.parse(address)
@@ -102,9 +103,19 @@ module MerbExceptions
       template = ERB.new File.open(path,'r') { |f| f.read }
       template.result(binding)
     end
-
+    
+    # Used so that we can accept either a single value or array (e.g. of 
+    # webhooks) in our YAML file.
     def option_as_array(option)
-      @config[option].is_a?(Array) ? @config[option] : [@config[option]]
+      value = @config[option]
+      case value
+      when Array
+        value.reject { |e| e.nil? } # Don't accept nil values
+      when String
+        [value]
+      else
+        []
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
 History.txt
 License.txt
-README.txt
+README.markdown
 Rakefile
 lib/merb_exceptions.rb
 lib/merb_exceptions/controller_extensions.rb

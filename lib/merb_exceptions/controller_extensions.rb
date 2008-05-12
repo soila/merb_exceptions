@@ -2,13 +2,14 @@ module MerbExceptions
   module ControllerExtensions
     
     def self.included(mod)
-      mod.class_eval <<-HERE
-      def internal_server_error
-        @exception = self.params[:exception]
-        @exception_name = @exception.name.split("_").map {|x| x.capitalize}.join(" ")
-        self.render_and_notify :layout=>false
+      mod.class_eval do
+        def internal_server_error
+          # These two variables are required by the default exception template
+          @exception = self.params[:exception]
+          @exception_name = @exception.name.split("_").map {|x| x.capitalize}.join(" ")
+          self.render_and_notify :layout=>false
+        end
       end
-      HERE
     end
     
 

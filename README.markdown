@@ -29,6 +29,10 @@ The plugin doesn't modify any existing code or do anything particularly magical 
 
     include MerbExceptions::ControllerExtensions
 
+If you have specified any email addresses and are not already requiring merb-mailer then you need to do so. It also needs configuration.
+
+    dependency 'merb-mailer'
+
 Settings
 --------
 `web_hooks`, `email_addresses`, and `environments` can either be a single string or an array of strings.

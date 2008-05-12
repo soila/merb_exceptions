@@ -12,6 +12,7 @@ module MerbExceptions
         :web_hooks       => [],
         :email_addresses => [],
         :app_name        => "Merb Application",
+        :email_from      => "exceptions@app.com",
         :environments    => ['production']
       }.merge(Merb::Plugins.config[:exceptions] || {})
     end
@@ -87,8 +88,8 @@ module MerbExceptions
       Merb.logger.info "- emailing to #{address}"
       email = Merb::Mailer.new({
         :to => address,
-        :from => "exceptions@app.com",
-        :subject => "[EXCEPTION] (#{@config[:app_name]}) #{exception.message}",
+        :from => "#{@config[:app_name]} <#{@config[:email_from]}>",
+        :subject => "[#{@config[:app_name]} EXCEPTION] #{exception.message}",
         :text => body
       })
       email.deliver!

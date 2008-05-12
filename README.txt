@@ -18,6 +18,7 @@ If you don't already have a plugins.yml file in your config folder then you will
 
 :exceptions:
   :app_name: My App Name
+  :email_from: exceptions@myapp.com
   :web_hooks: 
     - http://www.google.com
     - http://localhost:4000/exceptions

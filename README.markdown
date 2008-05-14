@@ -83,7 +83,13 @@ Requirements
 
 Install
 -------
-* `rake install_gem`
+Install gem from github
+
+    sudo gem install newbamboo-merb_exceptions --source=http://gems.github.com
+
+or install from source with
+
+    rake install_gem
 
 Licence
 -------

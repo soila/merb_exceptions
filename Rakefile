@@ -1,11 +1,44 @@
-require 'config/requirements'
-require 'config/hoe' # setup Hoe + all gem configuration
-require 'spec/rake/spectask'
+require 'rubygems'
+require 'rake/gempackagetask'
 
-Dir['tasks/**/*.rake'].each { |rake| load rake }
+PLUGIN = "merb_exceptions"
+NAME = "merb_exceptions"
+VERSION = "0.1.1"
+AUTHOR = 'Andy Kent'
+EMAIL = "andy@new-bamboo.co.uk"
+HOMEPAGE = "http://merb-plugins.rubyforge.org/me/"
+SUMMARY = "Allows Merb to forward exceptions to emails or web hooks"
 
-  Spec::Rake::SpecTask.new('spec') do |t|
-    t.spec_opts << '--format' << 'specdoc' << '--colour'
-    t.spec_opts << '--loadby' << 'random'
-    t.spec_files = Dir["spec/**/*_spec.rb"]
+spec = Gem::Specification.new do |s|
+  s.name = NAME
+  s.version = VERSION
+  s.platform = Gem::Platform::RUBY
+  s.has_rdoc = true
+  s.extra_rdoc_files = ["README", "LICENSE", 'TODO']
+  s.summary = SUMMARY
+  s.description = s.summary
+  s.author = AUTHOR
+  s.email = EMAIL
+  s.homepage = HOMEPAGE
+  s.add_dependency('merb', '>= 0.4.0')
+  s.require_path = 'lib'
+  s.autorequire = PLUGIN
+  s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec}/**/*")
+end
+
+Rake::GemPackageTask.new(spec) do |pkg|
+  pkg.gem_spec = spec
+end
+
+task :install => [:package] do
+  sh %{sudo gem install pkg/#{NAME}-#{VERSION} --no-update-sources}
+end
+
+namespace :jruby do
+
+  desc "Run :package and install the resulting .gem with jruby"
+  task :install => :package do
+    sh %{#{SUDO} jruby -S gem install pkg/#{NAME}-#{Merb::VERSION}.gem --no-rdoc --no-ri}
   end
+  
+end

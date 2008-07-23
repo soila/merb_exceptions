@@ -70,8 +70,8 @@ module MerbExceptions
         'exception_backtrace'      => (exception.backtrace or []).join("\n"),
         'merb_exception_class'     => exception.class,
         'original_exception_class' => original_exception_class,
-        'environment'              => details['environment']
-
+        'environment'              => details['environment'],
+        'app_name'                 => @config[:app_name]
       }
     end
 

@@ -37,7 +37,7 @@ Settings
 --------
 `web_hooks`, `email_addresses`, and `environments` can either be a single string or an array of strings.
 
-`app_name`: Used to customise emails (default "My App")
+`app_name`: Used to customise emails and web hooks (default "My App")
 
 `email_from`: Exceptions are sent from this address
 

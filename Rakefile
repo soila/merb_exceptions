@@ -3,7 +3,7 @@ require 'rake/gempackagetask'
 
 PLUGIN = "merb_exceptions"
 NAME = "merb_exceptions"
-VERSION = "0.1.1"
+VERSION = "0.1.2"
 AUTHOR = 'Andy Kent'
 EMAIL = "andy@new-bamboo.co.uk"
 HOMEPAGE = "http://merb-plugins.rubyforge.org/me/"

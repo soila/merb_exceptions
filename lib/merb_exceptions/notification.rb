@@ -88,7 +88,7 @@ module MerbExceptions
       Merb.logger.info "- emailing to #{address}"
       email = Merb::Mailer.new({
         :to => address,
-        :from => "#{@config[:app_name]} <#{@config[:email_from]}>",
+        :from => @config[:email_from],
         :subject => "[#{@config[:app_name]} EXCEPTION] #{exception.message}",
         :text => body
       })

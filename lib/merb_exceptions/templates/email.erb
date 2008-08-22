@@ -1,34 +1,38 @@
-Woops! Sorry but it looks like something went wrong.
-With any luck the details below will aid you in solving the problem.
+<% params['exceptions'].each do |e| %>
+EXCEPTION
+----------
+<% if e.respond_to?(:name) %>
+Name: <%= e.name.to_s.split("_").map {|x| x.capitalize}.join(" ") %>
+<% end %>
+<% if e.respond_to?(:status) %>
+Status Code: <%= e.status %>
+<% end %>
+Merb Exception Class: <%= e.class %>
+Message: <%= e.message %>
 
 
+BACKTRACE
+----------
+<%= (e.backtrace || []).join("\n") %>
+
+
+<% end %>
 REQUEST
 --------
 URL: <%= params['request_url'] %>
 Controller: <%= params['request_controller'] %>
 Action:  <%= params['request_action'] %>
-Status Code: <%= params['request_status_code'] %>
-
-
-EXCEPTION
-----------
-Name: <%= params['exception_name'] %>
-Merb Exception Class: <%= params['merb_exception_class'] %>
-Original Exception Class: <%= params['original_exception_class'] %>
-message: <%= params['exception_message'] %>
 
 
 PARAMETERS
 -----------
-<% params['request_params'].each do |key,value| %><%= key %>: <%= value %>
+<% params['request_params'].each do |key,value| %>
+<%= key %>: <%= value %>
 <% end %>
-
-BACKTRACE
-----------
-<%= params['exception_backtrace'] %>
 
 
 ENVIRONMENT
 ------------
-<% params['environment'].each do |key,value| %><%= key %>: <%= value %>
+<% params['environment'].each do |key,value| %>
+<%= key %>: <%= value %>
 <% end %>
